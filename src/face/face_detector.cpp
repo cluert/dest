@@ -70,7 +70,7 @@ namespace dest {
             FaceDetector::data &data = *_data;
             
             if (img.channels() == 3 || img.channels() == 4) {
-                cv::cvtColor(img, data.gray, CV_BGR2GRAY);
+                cv::cvtColor(img, data.gray, cv::COLOR_BGRA2GRAY);
             }
             else {
                 img.copyTo(data.gray);
@@ -78,13 +78,13 @@ namespace dest {
             cv::equalizeHist(data.gray, data.gray);
             
             //-- Detect faces
-            data.classifierFace.detectMultiScale(data.gray, faces, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, cv::Size(10, 10));
+            data.classifierFace.detectMultiScale(data.gray, faces, 1.1, 2, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(10, 10));
             if (data.withEyes) {
                     std::vector<cv::Rect> finalFaces;
                     for (size_t i = 0; i < faces.size(); ++i) {
                         cv::Mat roi = data.gray(faces[i]);
                         std::vector<cv::Rect> eyes;
-                        data.classifierEyes.detectMultiScale(roi, eyes, 1.1, 2, 0 | CV_HAAR_SCALE_IMAGE, cv::Size(10, 10));
+                        data.classifierEyes.detectMultiScale(roi, eyes, 1.1, 2, 0 | cv::CASCADE_SCALE_IMAGE, cv::Size(10, 10));
                         if (eyes.size() > 0)
                             finalFaces.push_back(faces[i]);
                     }

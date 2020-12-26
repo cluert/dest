@@ -70,7 +70,7 @@ int main(int argc, char **argv)
     
     // Run predictor on all face rectangles
     cv::Mat imageRefGray;
-    cv::cvtColor(imageRef, imageRefGray, CV_BGR2GRAY);
+    cv::cvtColor(imageRef, imageRefGray, cv::COLOR_BGR2GRAY);
     dest::core::MappedImage mappedGray = dest::util::toDestHeaderOnly(imageRefGray);
     
     std::vector<size_t> permutation;

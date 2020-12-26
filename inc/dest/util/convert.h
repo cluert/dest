@@ -42,7 +42,7 @@ namespace dest {
 
             cv::Mat singleChannel;
             if (src.channels() == 3) {
-                cv::cvtColor(src, singleChannel, CV_BGR2GRAY);
+                cv::cvtColor(src, singleChannel, cv::COLOR_BGRA2GRAY);
             } else {
                 singleChannel = src;
             }

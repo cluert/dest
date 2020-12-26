@@ -644,7 +644,7 @@ namespace dest {
 
         void ShapeDatabase::scaleImageShapeAndRect(cv::Mat &img, core::Shape & s, core::Rect & r, float factor) const
         {
-            cv::resize(img, img, cv::Size(0, 0), factor, factor, CV_INTER_CUBIC);
+            cv::resize(img, img, cv::Size(0, 0), factor, factor, cv::INTER_CUBIC);
             s *= factor;
             r *= factor;
         }

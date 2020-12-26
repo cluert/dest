@@ -24,7 +24,7 @@ namespace dest {
         void drawShape(cv::Mat &img, const core::Shape &s, const cv::Scalar &color) {
             
             for (core::Shape::Index i = 0; i < s.cols(); ++i) {
-                cv::circle(img, cv::Point2f(s(0, i), s(1 ,i)), 1.f, color, -1, CV_AA);
+                cv::circle(img, cv::Point2f(s(0, i), s(1 ,i)), 1.f, color, -1, cv::LINE_AA);
             }
             
         }
@@ -42,7 +42,7 @@ namespace dest {
             for (core::Shape::Index i = 0; i < s.cols(); ++i) {
                 cv::Vec3b temp = colors.at<cv::Vec3b>(0, static_cast<int>(i));
                 cv::Scalar color(temp[0], temp[1], temp[2]);
-                cv::circle(img, cv::Point2f(s(0, i), s(1 ,i)), 1.f, color, -1, CV_AA);
+                cv::circle(img, cv::Point2f(s(0, i), s(1 ,i)), 1.f, color, -1, cv::LINE_AA);
             }
         }
         
@@ -50,16 +50,16 @@ namespace dest {
             for (core::Shape::Index i = 0; i < s.cols(); ++i) {
                 std::ostringstream str;
                 str << i;
-                cv::putText(img, str.str(), cv::Point2f(s(0, i), s(1 ,i)), CV_FONT_HERSHEY_PLAIN, 0.7f, color);
+                cv::putText(img, str.str(), cv::Point2f(s(0, i), s(1 ,i)), cv::FONT_HERSHEY_PLAIN, 0.7f, color);
             }
 
         }
         
         void drawRect(cv::Mat &img, const core::Rect &r, const cv::Scalar &color) {
-            cv::line(img, cv::Point2f(r(0,0), r(1,0)), cv::Point2f(r(0,1), r(1,1)), color, 1, CV_AA);
-            cv::line(img, cv::Point2f(r(0,1), r(1,1)), cv::Point2f(r(0,3), r(1,3)), color, 1, CV_AA);
-            cv::line(img, cv::Point2f(r(0,3), r(1,3)), cv::Point2f(r(0,2), r(1,2)), color, 1, CV_AA);
-            cv::line(img, cv::Point2f(r(0,2), r(1,2)), cv::Point2f(r(0,0), r(1,0)), color, 1, CV_AA);
+            cv::line(img, cv::Point2f(r(0,0), r(1,0)), cv::Point2f(r(0,1), r(1,1)), color, 1, cv::LINE_AA);
+            cv::line(img, cv::Point2f(r(0,1), r(1,1)), cv::Point2f(r(0,3), r(1,3)), color, 1, cv::LINE_AA);
+            cv::line(img, cv::Point2f(r(0,3), r(1,3)), cv::Point2f(r(0,2), r(1,2)), color, 1, cv::LINE_AA);
+            cv::line(img, cv::Point2f(r(0,2), r(1,2)), cv::Point2f(r(0,0), r(1,0)), color, 1, cv::LINE_AA);
         }
         
         cv::Mat drawShape(const core::Image &img, const core::Shape &s, const cv::Scalar &color)
@@ -67,7 +67,7 @@ namespace dest {
             cv::Mat tmp, tmp2;
 
             util::toCVHeaderOnly(img, tmp);
-            cv::cvtColor(tmp, tmp2, CV_GRAY2BGR);
+            cv::cvtColor(tmp, tmp2, cv::COLOR_GRAY2BGR);
             
             drawShape(tmp2, s, color);
 
@@ -81,17 +81,17 @@ namespace dest {
                 cv::line(img,
                     cv::Point2f(s(0, tris[i * 3 + 0]), s(1, tris[i * 3 + 0])),
                     cv::Point2f(s(0, tris[i * 3 + 1]), s(1, tris[i * 3 + 1])),
-                    color, 1, CV_AA);
+                    color, 1, cv::LINE_AA);
 
                 cv::line(img,
                     cv::Point2f(s(0, tris[i * 3 + 1]), s(1, tris[i * 3 + 1])),
                     cv::Point2f(s(0, tris[i * 3 + 2]), s(1, tris[i * 3 + 2])),
-                    color, 1, CV_AA);
+                    color, 1, cv::LINE_AA);
 
                 cv::line(img,
                     cv::Point2f(s(0, tris[i * 3 + 2]), s(1, tris[i * 3 + 2])),
                     cv::Point2f(s(0, tris[i * 3 + 0]), s(1, tris[i * 3 + 0])),
-                    color, 1, CV_AA);
+                    color, 1, cv::LINE_AA);
             }
         }
 

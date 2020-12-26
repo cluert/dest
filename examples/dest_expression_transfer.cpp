@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     if (opts.device.size() == 1 && isdigit(opts.device[0])) {
         // Open capture device by index
         cap.open(atoi(opts.device.c_str()));
-        cap.set(CV_CAP_PROP_SETTINGS, 1);
+        cap.set(cv::CAP_PROP_SETTINGS, 1);
     } else {
         // Open video video
         cap.open(opts.device.c_str());
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
             break;
         
         cv::resize(tmp, targetRef, cv::Size(), opts.imageScale, opts.imageScale);
-        cv::cvtColor(targetRef, targetRefGray, CV_BGR2GRAY);
+        cv::cvtColor(targetRef, targetRefGray, cv::COLOR_BGRA2GRAY);
         
         dest::core::MappedImage img = dest::util::toDestHeaderOnly(targetRefGray);
         
@@ -131,7 +131,7 @@ int main(int argc, char **argv)
             break;
         
         cv::resize(tmp, source, cv::Size(), opts.imageScale, opts.imageScale);
-        cv::cvtColor(source, sourceGray, CV_BGR2GRAY);
+        cv::cvtColor(source, sourceGray, cv::COLOR_BGRA2GRAY);
 
         dest::core::MappedImage img = dest::util::toDestHeaderOnly(sourceGray);
         
